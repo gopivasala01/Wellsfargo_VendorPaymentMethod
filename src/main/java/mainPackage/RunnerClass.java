@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -191,7 +192,12 @@ public class RunnerClass {
         // Quit the thread-specific ChromeDriver instance
         ChromeDriver driver = driverThreadLocal.get();
         if (driver != null) {
-            driver.quit();
+        	 try {
+                 driver.quit();
+             } catch (WebDriverException e) {
+                 // Handle WebDriverException
+                 System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
+             }
         }
     }
 
