@@ -37,7 +37,7 @@ public class RunnerClass {
     @BeforeMethod
     public boolean setUp() throws InterruptedException {
         // Set up WebDriverManager to automatically download and set up ChromeDriver
-    	System.setProperty("webdriver.http.factory", "jdk-http-client");
+    	//System.setProperty("webdriver.http.factory", "jdk-http-client");
         WebDriverManager.chromedriver().setup();
         RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
 		Map<String, Object> prefs = new HashMap<String, Object>();
