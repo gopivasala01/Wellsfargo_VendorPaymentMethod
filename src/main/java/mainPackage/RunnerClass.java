@@ -36,41 +36,48 @@ public class RunnerClass {
     private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
 
     @BeforeMethod
-    public boolean setUp() throws InterruptedException {
+    public boolean setUp(){
         // Set up WebDriverManager to automatically download and set up ChromeDriver
     	//System.setProperty("webdriver.http.factory", "jdk-http-client");
-        WebDriverManager.chromedriver().setup();
-        RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
-		Map<String, Object> prefs = new HashMap<String, Object>();
-	    // Use File.separator as it will work on any OS
-	    prefs.put("download.default_directory",RunnerClass.downloadFilePath);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-        // Create a new ChromeDriver instance for each thread
-        ChromeDriver driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+    	try {
+    		 WebDriverManager.chromedriver().setup();
+    	        RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
+    			Map<String, Object> prefs = new HashMap<String, Object>();
+    		    // Use File.separator as it will work on any OS
+    		    prefs.put("download.default_directory",RunnerClass.downloadFilePath);
+    	        ChromeOptions options = new ChromeOptions();
+    	        options.addArguments("--remote-allow-origins=*");
+    	        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+    	        WebDriverManager.chromedriver().clearDriverCache().setup();
+    	        // Create a new ChromeDriver instance for each thread
+    	        ChromeDriver driver = new ChromeDriver(options);
+    	        driver.manage().window().maximize();
 
-        // Store the ChromeDriver instance in ThreadLocal
-        driverThreadLocal.set(driver);
-        driver.get(AppConfig.URL);
-        driver.findElement(Locators.userName).sendKeys(AppConfig.username);
-        driver.findElement(Locators.password).sendKeys(AppConfig.password);
-        Thread.sleep(2000);
-        driver.findElement(Locators.signMeIn).click();
-        Thread.sleep(3000);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        try
-        {
-        if(driver.findElement(Locators.loginError).isDisplayed())
-        {
-        	System.out.println("Login failed");
-			return false;
-        }
-        }
-        catch(Exception e) {}
-		return true;
+    	        // Store the ChromeDriver instance in ThreadLocal
+    	        driverThreadLocal.set(driver);
+    	        driver.get(AppConfig.URL);
+    	        driver.findElement(Locators.userName).sendKeys(AppConfig.username);
+    	        driver.findElement(Locators.password).sendKeys(AppConfig.password);
+    	        Thread.sleep(2000);
+    	        driver.findElement(Locators.signMeIn).click();
+    	        Thread.sleep(3000);
+    	        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+    	        try
+    	        {
+    	        if(driver.findElement(Locators.loginError).isDisplayed())
+    	        {
+    	        	System.out.println("Login failed");
+    				return false;
+    	        }
+    	        }
+    	        catch(Exception e) {}
+    			
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		return false;
+    	}
+    	return true;
         
         
     }
@@ -190,15 +197,17 @@ public class RunnerClass {
    @AfterMethod
     public void tearDown() {
         // Quit the thread-specific ChromeDriver instance
-        ChromeDriver driver = driverThreadLocal.get();
-        if (driver != null) {
-        	 try {
-                 driver.quit();
-             } catch (WebDriverException e) {
-                 // Handle WebDriverException
-                 System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
-             }
-        }
+		ChromeDriver driver = driverThreadLocal.get();
+		try {
+			if (driver != null) {
+
+				driver.quit();
+			}
+		} catch (WebDriverException e) {
+			// Handle WebDriverException
+			System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
+		}
+        
     }
 
     @DataProvider(name = "testData", parallel = true)
