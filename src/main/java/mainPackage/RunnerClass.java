@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -194,21 +195,41 @@ public class RunnerClass {
         
         // Add your test code here
 
+   @SuppressWarnings("deprecation")
    @AfterMethod
-    public void tearDown() {
-        // Quit the thread-specific ChromeDriver instance
-		ChromeDriver driver = driverThreadLocal.get();
-		try {
-			if (driver != null) {
+   public void tearDown() {
+	    try {
+	    	ChromeDriver driver = driverThreadLocal.get();
+	        if (driver != null) {
+	            // Attempt to close the browser window
+	            driver.close();
+	            
+	            // Wait for a short period for the browser process to terminate
+	            Thread.sleep(2000);
+	            
+	            // Check if the WebDriver process is still running
+	            if (isProcessRunning(driver)) {
+	                // If the process is still running, forcibly kill it
+	                driver.quit();
+	                Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe"); // For Windows
+	            }
+	        }
+	    } catch (Exception e) {
+	    	System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
+	    }
+	}
 
-				driver.quit();
-			}
-		} catch (WebDriverException e) {
-			// Handle WebDriverException
-			System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
-		}
-        
-    }
+	private boolean isProcessRunning(WebDriver driver) {
+	    try {
+	        // Check if the WebDriver process is still running
+	        driver.getTitle(); // Accessing a method to check if the WebDriver is still alive
+	        return true;
+	    } catch (Exception e) {
+	        // WebDriver process has terminated
+	        return false;
+	    }
+	}
+   
 
     @DataProvider(name = "testData", parallel = true)
     public Object[][] testData() {
