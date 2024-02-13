@@ -118,6 +118,10 @@ public class RunnerClass {
 			String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
 			DataBase.updateTable(query);
 			previousRecordCompany = company;	
+			portfolioName="";
+	    	baseRentAmount ="";
+	    	baseRentFromPW="";
+	    	failedReason="";
 			
 		}
 		else {
@@ -132,6 +136,10 @@ public class RunnerClass {
 						+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
 						+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
 				DataBase.updateTable(query);
+				portfolioName="";
+		    	baseRentAmount ="";
+		    	baseRentFromPW="";
+		    	failedReason="";
 				
 			}
 			else {
@@ -143,7 +151,10 @@ public class RunnerClass {
 							+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
 							+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
 					DataBase.updateTable(query);
-					
+					portfolioName="";
+			    	baseRentAmount ="";
+			    	baseRentFromPW="";
+			    	failedReason="";
 				}
 				else {
 					// Update table for successful lease
@@ -153,6 +164,10 @@ public class RunnerClass {
 						String query = "Update Automation.BaseRentUpdate set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
 								+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
 						DataBase.updateTable(query);
+						portfolioName="";
+				    	baseRentAmount ="";
+				    	baseRentFromPW="";
+				    	failedReason="";
 						
 					} catch (Exception e) {}
 				}

@@ -86,7 +86,7 @@ public class UpdateBaseRent
 					String subsidizedRent =  autoChargeAmounts.get(i).getText();
 					double d =Double.parseDouble(subsidizedRent.substring(1, subsidizedRent.length()).replace(",", ""));
 					subsidizedRentCalculated = d + subsidizedRentCalculated;
-					
+					subsidizedRentCalculated = Math.round(subsidizedRentCalculated * 100.0) / 100.0;
 					subsidizedRentAvailable = true;
 				}
 				
@@ -101,8 +101,8 @@ public class UpdateBaseRent
 				{
 					String baseRent =  autoChargeAmounts.get(i).getText();
 					double d =Double.parseDouble(baseRent.substring(1, baseRent.length()).replace(",", ""));
-					rentCalculated = d + rentCalculated;
-					
+					rentCalculated = Double.sum(d, rentCalculated);
+					rentCalculated = Math.round(rentCalculated * 100.0) / 100.0;
 					baseRentAvailable = true;
 					//break;
 				}
