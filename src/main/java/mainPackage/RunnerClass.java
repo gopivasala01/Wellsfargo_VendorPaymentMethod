@@ -1,5 +1,6 @@
 package mainPackage;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -245,7 +246,8 @@ public class RunnerClass {
 	            if (isProcessRunning(driver)) {
 	                // If the process is still running, forcibly kill it
 	                driver.quit();
-	                Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe"); // For Windows
+	                killChromeDriverProcess();
+	                //Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe"); // For Windows
 	            }
 	        }
 	    } catch (Exception e) {
@@ -261,6 +263,17 @@ public class RunnerClass {
 	    } catch (Exception e) {
 	        // WebDriver process has terminated
 	        return false;
+	    }
+	}
+	
+	private void killChromeDriverProcess() throws IOException, InterruptedException {
+	    ProcessBuilder processBuilder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe"); // For Windows
+	    // ProcessBuilder processBuilder = new ProcessBuilder("pkill", "-f", "chromedriver"); // For Unix/Linux
+	    processBuilder.inheritIO(); // Redirects the input/output/error streams of the spawned process to the current Java process
+	    Process process = processBuilder.start();
+	    int exitCode = process.waitFor(); // Wait for the process to terminate
+	    if (exitCode != 0) {
+	        System.out.println("Failed to kill chromedriver process.");
 	    }
 	}
    
