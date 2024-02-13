@@ -174,32 +174,51 @@ public class RunnerClass {
 			}
 		}
 		
-        
     }
 
     public static String getBaseRentAmount() {
-        return baseRentAmountThreadLocal.get();
+    	if(baseRentAmountThreadLocal.get().isEmpty()) {
+    		return "";
+    	}
+    	else {
+    		 return baseRentAmountThreadLocal.get();
+    	}
     }
 
     public static void setBaseRentAmount(String baseRentAmount) {
         baseRentAmountThreadLocal.set(baseRentAmount);
     }
     public static String getPortfolioName() {
-        return portfolioNameThreadLocal.get();
+    	if(portfolioNameThreadLocal.get().isEmpty()) {
+    		return "";
+    	}
+    	else {
+    		 return portfolioNameThreadLocal.get();
+    	}
     }
 
     public static void setPortfolioName(String portfolioName) {
     	portfolioNameThreadLocal.set(portfolioName);
     }
     public static String getBaseRentFromPW() {
-        return baseRentFromPWThreadLocal.get();
+    	if(baseRentFromPWThreadLocal.get().isEmpty()) {
+    		return "";
+    	}
+    	else {
+    		 return baseRentFromPWThreadLocal.get();
+    	}
     }
 
     public static void setBaseRentFromPW(String baseRentFromPW) {
     	baseRentFromPWThreadLocal.set(baseRentFromPW);
     }
     public static String getFailedReason() {
-        return failedReasonThreadLocal.get();
+    	if(failedReasonThreadLocal.get().isEmpty()) {
+    		return "";
+    	}
+    	else {
+    		 return failedReasonThreadLocal.get();
+    	}
     }
 
     public static void setFailedReason(String failedReason) {
