@@ -233,8 +233,8 @@ public class RunnerClass {
    @SuppressWarnings("deprecation")
    @AfterMethod
    public void tearDown() {
+	   ChromeDriver driver = driverThreadLocal.get();
 	    try {
-	    	ChromeDriver driver = driverThreadLocal.get();
 	        if (driver != null) {
 	            // Attempt to close the browser window
 	            driver.close();
@@ -253,6 +253,7 @@ public class RunnerClass {
 	    } catch (Exception e) {
 	    	System.err.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
 	    }
+	    driverThreadLocal.remove();
 	}
 
 	private boolean isProcessRunning(WebDriver driver) {
