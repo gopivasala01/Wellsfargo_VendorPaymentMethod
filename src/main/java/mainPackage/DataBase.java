@@ -1,5 +1,6 @@
 package mainPackage;
 
+import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.Statement;
 
 public class DataBase 
 {
-	public static boolean getLeasesList(String pendingLeasesQuery)
+	public static boolean getLeasesList(String pendingLeasesQuery) throws SocketException
 	{
 		try
 		{
@@ -111,15 +112,17 @@ public class DataBase
 		 return false;
 		}
 	}
-	public static void updateTable(String query)
+	public static void updateTable(String query) throws SocketException
 	 {
 		    try (Connection conn = DriverManager.getConnection(AppConfig.connectionUrl);
 		        Statement stmt = conn.createStatement();) 
 		    {
 		      stmt.executeUpdate(query);
 		      System.out.println("Record Updated");
-		      
-		    } catch (SQLException e) 
+		      stmt.close();
+	          conn.close();
+		    } 
+		    catch (Exception e) 
 		    {
 		      e.printStackTrace();
 		    }

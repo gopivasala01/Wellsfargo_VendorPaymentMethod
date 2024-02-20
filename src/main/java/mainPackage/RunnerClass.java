@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.io.IOException;
+import java.net.SocketException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -281,7 +282,12 @@ public class RunnerClass {
 
     @DataProvider(name = "testData", parallel = true)
     public Object[][] testData() {
-    	DataBase.getLeasesList(AppConfig.pendingLeasesQuery);
+    	try {
+			DataBase.getLeasesList(AppConfig.pendingLeasesQuery);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return pendingLeases;
     }
 }
