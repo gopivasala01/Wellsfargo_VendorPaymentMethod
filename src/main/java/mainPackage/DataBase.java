@@ -118,8 +118,7 @@ public class DataBase
 		    {
 		      stmt.executeUpdate(query);
 		      System.out.println("Record Updated");
-		      stmt.close();
-	            conn.close();
+		      
 		    } catch (SQLException e) 
 		    {
 		      e.printStackTrace();
