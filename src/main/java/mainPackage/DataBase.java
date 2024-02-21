@@ -124,7 +124,8 @@ public class DataBase
 		    } 
 		    catch (Exception e) 
 		    {
-		      e.printStackTrace();
+		    	System.out.println("Error while closing connection");
+		      //e.printStackTrace();
 		    }
 	 }
 	
