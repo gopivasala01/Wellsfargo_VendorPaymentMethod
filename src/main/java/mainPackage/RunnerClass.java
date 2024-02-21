@@ -41,6 +41,7 @@ public class RunnerClass {
         // Set up WebDriverManager to automatically download and set up ChromeDriver
     	//System.setProperty("webdriver.http.factory", "jdk-http-client");
     	try {
+    			WebDriverManager.chromedriver().clearDriverCache().setup();
     		 	WebDriverManager.chromedriver().setup();
     	        RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
     			Map<String, Object> prefs = new HashMap<String, Object>();
@@ -49,7 +50,6 @@ public class RunnerClass {
     	        ChromeOptions options = new ChromeOptions();
     	        options.addArguments("--remote-allow-origins=*");
     	        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-    	        WebDriverManager.chromedriver().clearDriverCache().setup();
     	        // Create a new ChromeDriver instance for each thread
     	        ChromeDriver driver = new ChromeDriver(options);
     	        driver.manage().window().maximize();
