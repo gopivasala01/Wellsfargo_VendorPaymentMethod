@@ -42,7 +42,7 @@ public class RunnerClass {
     	//System.setProperty("webdriver.http.factory", "jdk-http-client");
     	try {
     			WebDriverManager.chromedriver().clearDriverCache().setup();
-    		 	WebDriverManager.chromedriver().setup();
+    		 	//WebDriverManager.chromedriver().setup();
     	        RunnerClass.downloadFilePath = AppConfig.downloadFilePath;
     			Map<String, Object> prefs = new HashMap<String, Object>();
     		    // Use File.separator as it will work on any OS
