@@ -42,6 +42,7 @@ public class UpdateBaseRent
 		List<WebElement> autoChargeAmounts = driver.findElements(Locators.autoCharge_Amount);
 		List<WebElement> autoChargeStartDates = driver.findElements(Locators.autoCharge_StartDate);
 		List<WebElement> autoChargeEndDates = driver.findElements(Locators.autoCharge_EndDate);
+		List<WebElement> autoChargeDescriptions = driver.findElements(Locators.autoCharge_description);
 		
 		try
 		{
@@ -97,13 +98,20 @@ public class UpdateBaseRent
 				String autoChargeStartDate = autoChargeStartDates.get(i).getText();
 				String autoChargeEndDate = autoChargeEndDates.get(i).getText();
 				String autoChargeAmount = autoChargeAmounts.get(i).getText();
+				String autoChargeDescription = autoChargeDescriptions.get(i).getText();
 				if(CommonMethods.compareDates(autoChargeStartDate,dateCalculated)==true&&((autoChargeEndDate.trim().equals(""))||CommonMethods.compareDates(dateCalculated, autoChargeEndDate))&&!autoChargeAmount.contains("-$"))
 				{
-					String baseRent =  autoChargeAmounts.get(i).getText();
-					double d =Double.parseDouble(baseRent.substring(1, baseRent.length()).replace(",", ""));
-					rentCalculated = Double.sum(d, rentCalculated);
-					rentCalculated = Math.round(rentCalculated * 100.0) / 100.0;
-					baseRentAvailable = true;
+					if(autoChargeDescription.toLowerCase().contains("mtm")) {
+						continue;
+					}
+					else {
+						String baseRent =  autoChargeAmounts.get(i).getText();
+						double d =Double.parseDouble(baseRent.substring(1, baseRent.length()).replace(",", ""));
+						rentCalculated = Double.sum(d, rentCalculated);
+						rentCalculated = Math.round(rentCalculated * 100.0) / 100.0;
+						baseRentAvailable = true;
+					}
+					
 					//break;
 				}
 			}
