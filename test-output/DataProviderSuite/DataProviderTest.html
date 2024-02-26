@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>DataProviderTest</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Feb 22 12:20:41 IST 2024</td>
+<td>Started on:</td><td>Mon Feb 26 12:47:15 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>53 seconds (53110 ms)</td>
+<tr><td>Total time:</td><td>2 seconds (2842 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -76,15 +76,35 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 307163, Savannah, 4312399875, 421, 2022-12-28 00:00:00.0</td>
-<td></td>
-<td>31</td>
-<td>mainPackage.RunnerClass@6f03482</td></tr>
-<tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 307165, Savannah, 4541153281, 293, 2023-05-05 00:00:00.0</td>
-<td></td>
-<td>32</td>
-<td>mainPackage.RunnerClass@6f03482</td></tr>
+<td title='mainPackage.RunnerClass.tearDownReports()'><b>tearDownReports</b><br>Test class: mainPackage.RunnerClass</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.flush()&quot; because &quot;mainPackage.RunnerClass.extent&quot; is null
+	at mainPackage.RunnerClass.tearDownReports(RunnerClass.java:310)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1510149529", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1510149529'><pre>java.lang.NullPointerException: Cannot invoke &quot;com.aventstack.extentreports.ExtentReports.flush()&quot; because &quot;mainPackage.RunnerClass.extent&quot; is null
+	at mainPackage.RunnerClass.tearDownReports(RunnerClass.java:310)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+	at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
+	at org.testng.TestRunner.afterRun(TestRunner.java:914)
+	at org.testng.TestRunner.run(TestRunner.java:605)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+</pre></div></td>
+<td>0</td>
+<td>mainPackage.RunnerClass@6743e411</td></tr>
 </table><p>
 </body>
 </html>

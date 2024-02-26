@@ -1,121 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="0" passed="0" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-02-22T17:05:07 IST" name="Default suite" finished-at="2024-02-22T17:06:01 IST" duration-ms="53701">
+  <suite started-at="2024-02-26T12:47:15 IST" name="DataProviderSuite" finished-at="2024-02-26T12:47:18 IST" duration-ms="2842">
     <groups>
     </groups>
-    <test started-at="2024-02-22T17:05:07 IST" name="Default test" finished-at="2024-02-22T17:06:01 IST" duration-ms="53701">
+    <test started-at="2024-02-26T12:47:15 IST" name="DataProviderTest" finished-at="2024-02-26T12:47:18 IST" duration-ms="2842">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="startReport()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:07 IST" name="startReport" finished-at="2024-02-22T17:05:08 IST" duration-ms="516" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- startReport -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:11 IST" name="setUp" finished-at="2024-02-22T17:05:27 IST" duration-ms="15864" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:11 IST" name="setUp" finished-at="2024-02-22T17:05:27 IST" duration-ms="15700" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:27 IST" name="testMethod" data-provider="testData" finished-at="2024-02-22T17:05:58 IST" duration-ms="31448" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[307163]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Savannah]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[4312399875]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[421]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[2022-12-28 00:00:00.0]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:27 IST" name="testMethod" data-provider="testData" finished-at="2024-02-22T17:05:57 IST" duration-ms="30536" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[307165]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[Savannah]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[4541153281]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[293]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[2023-05-05 00:00:00.0]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod -->
-        <test-method is-config="true" signature="getResult(org.testng.ITestResult)[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:57 IST" name="getResult" finished-at="2024-02-22T17:05:57 IST" duration-ms="16" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=testMethod status=SUCCESS method=RunnerClass.testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@233795b6] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getResult -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:57 IST" name="tearDown" finished-at="2024-02-22T17:06:00 IST" duration-ms="2176" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="getResult(org.testng.ITestResult)[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:58 IST" name="getResult" finished-at="2024-02-22T17:05:58 IST" duration-ms="1" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=testMethod status=SUCCESS method=RunnerClass.testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@233795b6] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getResult -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:05:58 IST" name="tearDown" finished-at="2024-02-22T17:06:00 IST" duration-ms="2168" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="tearDownReports()[pri:0, instance:mainPackage.RunnerClass@233795b6]" started-at="2024-02-22T17:06:00 IST" name="tearDownReports" finished-at="2024-02-22T17:06:01 IST" duration-ms="769" status="PASS">
+        <test-method is-config="true" signature="tearDownReports()[pri:0, instance:mainPackage.RunnerClass@6743e411]" started-at="2024-02-26T12:47:18 IST" name="tearDownReports" finished-at="2024-02-26T12:47:18 IST" duration-ms="24" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "com.aventstack.extentreports.ExtentReports.flush()" because "mainPackage.RunnerClass.extent" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "com.aventstack.extentreports.ExtentReports.flush()" because "mainPackage.RunnerClass.extent" is null
+at mainPackage.RunnerClass.tearDownReports(RunnerClass.java:310)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+at org.testng.TestRunner.invokeTestConfigurations(TestRunner.java:644)
+at org.testng.TestRunner.afterRun(TestRunner.java:914)
+at org.testng.TestRunner.run(TestRunner.java:605)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:437)
+at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:475)
+at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:58)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1589)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownReports -->
       </class> <!-- mainPackage.RunnerClass -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- DataProviderTest -->
+  </suite> <!-- DataProviderSuite -->
 </testng-results>
