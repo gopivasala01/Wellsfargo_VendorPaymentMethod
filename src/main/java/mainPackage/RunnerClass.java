@@ -50,7 +50,7 @@ public class RunnerClass {
     private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
     
     
-    @BeforeClass
+  /*  @BeforeClass
     public static void startReport() {
         // initialize the HtmlReporter
         htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") +"/ExtentReports/testReport.html");
@@ -67,7 +67,7 @@ public class RunnerClass {
         htmlReporter.config().setTheme(Theme.STANDARD);
         htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
         
-    }
+    }*/
  
 
     @BeforeMethod
@@ -87,7 +87,7 @@ public class RunnerClass {
     	        // Create a new ChromeDriver instance for each thread
     	        ChromeDriver driver = new ChromeDriver(options);
     	        driver.manage().window().maximize();
-    	        test = extent.createTest("Login Page");
+    	        //test = extent.createTest("Login Page");
     	        // Store the ChromeDriver instance in ThreadLocal
     	        driverThreadLocal.set(driver);
     	        driver.get(AppConfig.URL);
@@ -264,7 +264,7 @@ public class RunnerClass {
         
         // Add your test code here
 
-    @AfterMethod
+  /*  @AfterMethod
     public void getResult(ITestResult result) {
         if(result.getStatus() == ITestResult.FAILURE) {
             test.log(Status.FAIL,result.getThrowable());
@@ -275,7 +275,7 @@ public class RunnerClass {
         else {
             test.log(Status.SKIP, result.getTestName());
         }
-    }
+    } */
  
     
    @SuppressWarnings("deprecation")
