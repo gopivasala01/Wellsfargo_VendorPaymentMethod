@@ -24,9 +24,11 @@ public class PropertyWare
 		String failedReason = "";
 		try
 		{
+			RunnerClass.test = RunnerClass.extent.createTest("Selecting Lease");
 			driver.manage().timeouts().implicitlyWait(100,TimeUnit.SECONDS);
 	        RunnerClass.wait = new WebDriverWait(driver, Duration.ofSeconds(100));
 	        driver.navigate().refresh();
+	        Thread.sleep(3000);
 	        PropertyWare.intermittentPopUp(driver);
 	        //if(PropertyWare.checkIfBuildingIsDeactivated()==true)
 	        	//return false;

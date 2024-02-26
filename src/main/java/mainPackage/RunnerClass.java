@@ -5,16 +5,24 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -27,6 +35,11 @@ public class RunnerClass {
 	
 	public static String previousRecordCompany;
 	public static boolean loggedOut = false;
+	public static ExtentSparkReporter htmlReporter;
+	 
+	public static ExtentReports extent;
+    //helps to generate the logs in the test report.
+	public static ExtentTest test;
     
 
     // Use ThreadLocal to store a separate ChromeDriver instance for each thread
@@ -35,6 +48,27 @@ public class RunnerClass {
     private static ThreadLocal<String> portfolioNameThreadLocal = new ThreadLocal<>();
     private static ThreadLocal<String> baseRentFromPWThreadLocal = new ThreadLocal<>();
     private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
+    
+    
+    @BeforeClass
+    public static void startReport() {
+        // initialize the HtmlReporter
+        htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") +"/ExtentReports/testReport.html");
+ 
+        //initialize ExtentReports and attach the HtmlReporter
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+ 
+ 
+        //configuration items to change the look and feel
+        //add content, manage tests etc
+        htmlReporter.config().setDocumentTitle("Simple Automation Report");
+        htmlReporter.config().setReportName("Base Rent Report");
+        htmlReporter.config().setTheme(Theme.STANDARD);
+        htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
+        
+    }
+ 
 
     @BeforeMethod
     public boolean setUp(){
@@ -53,7 +87,7 @@ public class RunnerClass {
     	        // Create a new ChromeDriver instance for each thread
     	        ChromeDriver driver = new ChromeDriver(options);
     	        driver.manage().window().maximize();
-
+    	        test = extent.createTest("Login Page");
     	        // Store the ChromeDriver instance in ThreadLocal
     	        driverThreadLocal.set(driver);
     	        driver.get(AppConfig.URL);
@@ -63,6 +97,7 @@ public class RunnerClass {
     	        driver.findElement(Locators.signMeIn).click();
     	        Thread.sleep(3000);
     	        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+    	        
     	        try
     	        {
     	        if(driver.findElement(Locators.loginError).isDisplayed())
@@ -72,7 +107,7 @@ public class RunnerClass {
     	        }
     	        }
     	        catch(Exception e) {}
-    			
+    	       
     	}
     	catch(Exception e) {
     		e.printStackTrace();
@@ -229,6 +264,20 @@ public class RunnerClass {
         
         // Add your test code here
 
+    @AfterMethod
+    public void getResult(ITestResult result) {
+        if(result.getStatus() == ITestResult.FAILURE) {
+            test.log(Status.FAIL,result.getThrowable());
+        }
+        else if(result.getStatus() == ITestResult.SUCCESS) {
+            test.log(Status.PASS, result.getTestName());
+        }
+        else {
+            test.log(Status.SKIP, result.getTestName());
+        }
+    }
+ 
+    
    @SuppressWarnings("deprecation")
    @AfterMethod
    public void tearDown() {
@@ -254,6 +303,12 @@ public class RunnerClass {
 	    }
 	    driverThreadLocal.remove();
 	}
+   
+   @AfterTest
+   public void tearDownReports() {
+       //to write or update test information to reporter
+       extent.flush();
+   }
 
 	private boolean isProcessRunning(WebDriver driver) {
 	    try {
