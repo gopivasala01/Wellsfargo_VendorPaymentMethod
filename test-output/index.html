@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-DataProviderSuite" class="navigator-link">
-              <span class="suite-name border-passed">DataProviderSuite</span>
+              <span class="suite-name border-failed">DataProviderSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,7 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">0 methods,   </span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-DataProviderSuite" class="hide-methods failed suite-DataProviderSuite"> (hide)</a> <!-- hide-methods failed suite-DataProviderSuite -->
+                      <a href="#" panel-name="suite-DataProviderSuite" class="show-methods failed suite-DataProviderSuite"> (show)</a> <!-- show-methods failed suite-DataProviderSuite -->
+                    </span>
+                    <div class="method-list-content failed suite-DataProviderSuite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-DataProviderSuite" title="mainPackage.RunnerClass" class="method navigator-link" hash-for-method="testMethod">testMethod</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-DataProviderSuite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -104,6 +118,30 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-DataProviderSuite" class="panel DataProviderSuite">
+          <div class="suite-DataProviderSuite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">mainPackage.RunnerClass</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testMethod">
+                  </a> <!-- testMethod -->
+                  <span class="method-name">testMethod</span>
+                  <div class="stack-trace">org.testng.TestNGException: 
+Data Provider public java.lang.Object[][] mainPackage.RunnerClass.testData() returned a null value
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 14 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-DataProviderSuite-class-failed -->
         </div> <!-- panel DataProviderSuite -->
         <div panel-name="test-xml-DataProviderSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -156,12 +194,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(0);
+data.addRows(1);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'testMethod')
+data.setCell(0, 2, 'mainPackage.RunnerClass')
+data.setCell(0, 3, 0);
 window.suiteTableData['DataProviderSuite']= { tableData: data, tableDiv: 'times-div-DataProviderSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 0 ms</span>
+              <span class="suite-total-time">Total running time: 30 seconds</span>
               <div id="times-div-DataProviderSuite">
               </div> <!-- times-div-DataProviderSuite -->
             </div> <!-- times-div -->

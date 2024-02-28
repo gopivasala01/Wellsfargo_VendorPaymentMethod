@@ -304,11 +304,11 @@ public class RunnerClass {
 	    driverThreadLocal.remove();
 	}
    
-   @AfterTest
+  /* @AfterTest
    public void tearDownReports() {
        //to write or update test information to reporter
        extent.flush();
-   }
+   }*/
 
 	private boolean isProcessRunning(WebDriver driver) {
 	    try {
@@ -322,7 +322,7 @@ public class RunnerClass {
 	}
 	
 	private void killChromeDriverProcess() throws IOException, InterruptedException {
-	    ProcessBuilder processBuilder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe"); // For Windows
+	    ProcessBuilder processBuilder = new ProcessBuilder("taskkill /F /IM chromedriver.exe"); // For Windows
 	    // ProcessBuilder processBuilder = new ProcessBuilder("pkill", "-f", "chromedriver"); // For Unix/Linux
 	    processBuilder.inheritIO(); // Redirects the input/output/error streams of the spawned process to the current Java process
 	    Process process = processBuilder.start();
