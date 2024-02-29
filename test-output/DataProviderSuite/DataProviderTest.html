@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>DataProviderTest</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/2/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Feb 29 10:50:01 IST 2024</td>
+<td>Started on:</td><td>Thu Feb 29 18:50:22 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>51 seconds (51391 ms)</td>
+<tr><td>Total time:</td><td>54 seconds (54443 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,8 +67,8 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
-<table width='100%' border='1' class='invocation-passed'>
-<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
 <td><b>Attribute(s)</b></td>
 <td width="30%"><b>Exception</b></td>
@@ -76,9 +76,66 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0</td>
-<td></td>
-<td>29</td>
+<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getPortfolioName(RunnerClass.java:227)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:151)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1768094426", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1768094426'><pre>java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getPortfolioName(RunnerClass.java:227)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:151)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+	at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+</pre></div></td>
+<td>15</td>
+<td>mainPackage.RunnerClass@7c7a06ec</td></tr>
+<tr>
+<td title='mainPackage.RunnerClass.testMethod()'><b>testMethod</b><br>Test class: mainPackage.RunnerClass<br>Parameters: 313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getBaseRentAmount(RunnerClass.java:215)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:167)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace431305839", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace431305839'><pre>java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getBaseRentAmount(RunnerClass.java:215)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:167)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+	at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+</pre></div></td>
+<td>33</td>
 <td>mainPackage.RunnerClass@7c7a06ec</td></tr>
 </table><p>
 </body>

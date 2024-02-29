@@ -1,48 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-02-29T10:50:01 IST" name="DataProviderSuite" finished-at="2024-02-29T10:50:52 IST" duration-ms="51391">
+  <suite started-at="2024-02-29T18:50:22 IST" name="DataProviderSuite" finished-at="2024-02-29T18:51:17 IST" duration-ms="54443">
     <groups>
     </groups>
-    <test started-at="2024-02-29T10:50:01 IST" name="DataProviderTest" finished-at="2024-02-29T10:50:52 IST" duration-ms="51391">
+    <test started-at="2024-02-29T18:50:22 IST" name="DataProviderTest" finished-at="2024-02-29T18:51:17 IST" duration-ms="54443">
       <class name="mainPackage.RunnerClass">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T10:50:04 IST" name="setUp" finished-at="2024-02-29T10:50:21 IST" duration-ms="17052" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:50:26 IST" name="setUp" finished-at="2024-02-29T18:50:41 IST" duration-ms="15366" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T10:50:21 IST" name="testMethod" data-provider="testData" finished-at="2024-02-29T10:50:50 IST" duration-ms="29038" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:50:26 IST" name="setUp" finished-at="2024-02-29T18:50:41 IST" duration-ms="15213" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:50:41 IST" name="testMethod" data-provider="testData" finished-at="2024-02-29T18:51:14 IST" duration-ms="33671" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[309715]]>
+                <![CDATA[313697]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[Idaho Falls]]>
+                <![CDATA[Utah]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[4688314375]]>
+                <![CDATA[4845568014]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[255]]>
+                <![CDATA[2950]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[2023-06-19 00:00:00.0]]>
+                <![CDATA[2016-02-01 00:00:00.0]]>
               </value>
             </param>
           </params>
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "String.isEmpty()" because the return value of "java.lang.ThreadLocal.get()" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "String.isEmpty()" because the return value of "java.lang.ThreadLocal.get()" is null
+at mainPackage.RunnerClass.getBaseRentAmount(RunnerClass.java:215)
+at mainPackage.RunnerClass.testMethod(RunnerClass.java:167)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1589)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T10:50:50 IST" name="tearDown" finished-at="2024-02-29T10:50:52 IST" duration-ms="2149" status="PASS">
+        <test-method signature="testMethod(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:50:41 IST" name="testMethod" data-provider="testData" finished-at="2024-02-29T18:50:57 IST" duration-ms="15741" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[328398]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Institutional Accounts (IAG)]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[4265836555]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[458]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[2022-11-28 00:00:00.0]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "String.isEmpty()" because the return value of "java.lang.ThreadLocal.get()" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "String.isEmpty()" because the return value of "java.lang.ThreadLocal.get()" is null
+at mainPackage.RunnerClass.getPortfolioName(RunnerClass.java:227)
+at mainPackage.RunnerClass.testMethod(RunnerClass.java:151)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:80)
+at org.testng.internal.invokers.TestMethodWithDataProviderMethodWorker.call(TestMethodWithDataProviderMethodWorker.java:17)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+at java.base/java.lang.Thread.run(Thread.java:1589)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:50:57 IST" name="tearDown" finished-at="2024-02-29T18:50:59 IST" duration-ms="2175" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:mainPackage.RunnerClass@7c7a06ec]" started-at="2024-02-29T18:51:14 IST" name="tearDown" finished-at="2024-02-29T18:51:17 IST" duration-ms="2133" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

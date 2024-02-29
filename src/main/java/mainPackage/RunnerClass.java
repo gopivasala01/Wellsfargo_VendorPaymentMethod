@@ -169,7 +169,7 @@ public class RunnerClass {
 				failedReason = getFailedReason();
 				String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"
 						+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-						+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
+						+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
 				DataBase.updateTable(query);
 				portfolioName="";
 		    	baseRentAmount ="";
@@ -184,7 +184,7 @@ public class RunnerClass {
 					failedReason = getFailedReason();
 					String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"
 							+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-							+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
+							+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
 					DataBase.updateTable(query);
 					portfolioName="";
 			    	baseRentAmount ="";
@@ -197,7 +197,7 @@ public class RunnerClass {
 						System.out.println("Base Rent Updated");
 						failedReason = getFailedReason();
 						String query = "Update Automation.BaseRentUpdate set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-								+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName +"' where ID = '" + ID + "'";
+								+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
 						DataBase.updateTable(query);
 						portfolioName="";
 				    	baseRentAmount ="";

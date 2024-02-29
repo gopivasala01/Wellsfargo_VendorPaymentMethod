@@ -5,10 +5,9 @@
     <classes>
       <class name="mainPackage.RunnerClass">
         <methods>
-          <include name="tearDownReports"/>
           <include name="setUp"/>
+          <include name="testMethod" invocation-numbers="0 1"/>
           <include name="tearDown"/>
-          <include name="testMethod"/>
         </methods>
       </class> <!-- mainPackage.RunnerClass -->
     </classes>

@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-DataProviderSuite" class="navigator-link">
-              <span class="suite-name border-passed">DataProviderSuite</span>
+              <span class="suite-name border-failed">DataProviderSuite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,21 +92,26 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods, 2 failed,   </span>
                   </li>
                   <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-DataProviderSuite" class="hide-methods passed suite-DataProviderSuite"> (hide)</a> <!-- hide-methods passed suite-DataProviderSuite -->
-                      <a href="#" panel-name="suite-DataProviderSuite" class="show-methods passed suite-DataProviderSuite"> (show)</a> <!-- show-methods passed suite-DataProviderSuite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-DataProviderSuite" class="hide-methods failed suite-DataProviderSuite"> (hide)</a> <!-- hide-methods failed suite-DataProviderSuite -->
+                      <a href="#" panel-name="suite-DataProviderSuite" class="show-methods failed suite-DataProviderSuite"> (show)</a> <!-- show-methods failed suite-DataProviderSuite -->
                     </span>
-                    <div class="method-list-content passed suite-DataProviderSuite">
+                    <div class="method-list-content failed suite-DataProviderSuite">
                       <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-DataProviderSuite" title="mainPackage.RunnerClass" class="method navigator-link" hash-for-method="testMethod(309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0)">testMethod(309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0)</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-DataProviderSuite" title="mainPackage.RunnerClass" class="method navigator-link" hash-for-method="testMethod(328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0)">testMethod(328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content passed suite-DataProviderSuite -->
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-DataProviderSuite" title="mainPackage.RunnerClass" class="method navigator-link" hash-for-method="testMethod(313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0)">testMethod(313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-DataProviderSuite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,22 +123,52 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-DataProviderSuite" class="panel DataProviderSuite">
-          <div class="suite-DataProviderSuite-class-passed">
+          <div class="suite-DataProviderSuite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
+              <img src="failed.png"/>
               <span class="class-name">mainPackage.RunnerClass</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testMethod(309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0)">
-                  </a> <!-- testMethod(309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0) -->
+                  <a name="testMethod(328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0)">
+                  </a> <!-- testMethod(328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0) -->
                   <span class="method-name">testMethod</span>
-                  <span class="parameters">(309715,Idaho Falls,4688314375,255,2023-06-19 00:00:00.0)</span>
+                  <span class="parameters">(328398,Institutional Accounts (IAG),4265836555,458,2022-11-28 00:00:00.0)</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getPortfolioName(RunnerClass.java:227)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:151)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 7 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testMethod(313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0)">
+                  </a> <!-- testMethod(313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0) -->
+                  <span class="method-name">testMethod</span>
+                  <span class="parameters">(313697,Utah,4845568014,2950,2016-02-01 00:00:00.0)</span>
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;String.isEmpty()&quot; because the return value of &quot;java.lang.ThreadLocal.get()&quot; is null
+	at mainPackage.RunnerClass.getBaseRentAmount(RunnerClass.java:215)
+	at mainPackage.RunnerClass.testMethod(RunnerClass.java:167)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:577)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1589)
+... Removed 7 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-DataProviderSuite-class-passed -->
+          </div> <!-- suite-DataProviderSuite-class-failed -->
         </div> <!-- panel DataProviderSuite -->
         <div panel-name="test-xml-DataProviderSuite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -186,16 +221,20 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testMethod')
 data.setCell(0, 2, 'mainPackage.RunnerClass')
-data.setCell(0, 3, 29038);
+data.setCell(0, 3, 33671);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'testMethod')
+data.setCell(1, 2, 'mainPackage.RunnerClass')
+data.setCell(1, 3, 15741);
 window.suiteTableData['DataProviderSuite']= { tableData: data, tableDiv: 'times-div-DataProviderSuite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 51 seconds</span>
+              <span class="suite-total-time">Total running time: 54 seconds</span>
               <div id="times-div-DataProviderSuite">
               </div> <!-- times-div-DataProviderSuite -->
             </div> <!-- times-div -->
@@ -226,13 +265,29 @@ return data;
                 <span class="method-name">setUp</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-method before -->
+              <div class="configuration-method before">
+                <span class="method-name">setUp</span>
+                <span class="method-start">1 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testMethod(309715, Idaho Falls, 4688314375, 255, 2023-06-19 00:00:00.0)</span>
-                <span class="method-start">17056 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testMethod(313697, Utah, 4845568014, 2950, 2016-02-01 00:00:00.0)</span>
+                <span class="method-start">15216 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testMethod(328398, Institutional Accounts (IAG), 4265836555, 458, 2022-11-28 00:00:00.0)</span>
+                <span class="method-start">15366 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">46108 ms</span>
+                <span class="method-start">31126 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">tearDown</span>
+                <span class="method-start">48900 ms</span>
               </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
