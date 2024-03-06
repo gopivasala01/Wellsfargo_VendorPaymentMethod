@@ -101,7 +101,7 @@ public class UpdateBaseRent
 				String autoChargeDescription = autoChargeDescriptions.get(i).getText();
 				if(CommonMethods.compareDates(autoChargeStartDate,dateCalculated)==true&&((autoChargeEndDate.trim().equals(""))||CommonMethods.compareDates(dateCalculated, autoChargeEndDate))&&!autoChargeAmount.contains("-$"))
 				{
-					if(autoChargeDescription.toLowerCase().contains("mtm")) {
+					if(autoChargeDescription.toLowerCase().contains("mtm") || autoChargeDescription.toLowerCase().contains("pet")) {
 						continue;
 					}
 					else {
