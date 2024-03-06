@@ -29,7 +29,7 @@ public class AppConfig
 	   
 	  // public static String leaseFetchQuery  = "Select Company, Building,leaseName from Automation.InitialRentsUpdate where Status ='Pending' and Company ='Georgia'";
 	   
-	   public static String pendingLeasesQuery = "Select ID, Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where Company in('Florida','Dallas/Fort Worth','Boise') and Status in ('Active','Active - Notice Given','Active - TTO','Active - Month to Month') and Automation_Status is null";//and Automation_Notes in ('Base Rent could not be saved','Lease not found','Wrong Lease Entity ID')  ";//and LeaseEntityID = '3569451017'";//Company ='Alabama' and convert(date, Automation_Completiondate )<> '2023-07-05'";
+	   public static String pendingLeasesQuery = "Select ID, Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where Company in('California','Georgia','OKC') and Status in ('Active','Active - Notice Given','Active - TTO','Active - Month to Month') and Automation_Status is null";//and Automation_Notes in ('Base Rent could not be saved','Lease not found','Wrong Lease Entity ID')  ";//and LeaseEntityID = '3569451017'";//Company ='Alabama' and convert(date, Automation_Completiondate )<> '2023-07-05'";
 	   
 	   public static String failedLeasesQuery = "Select Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where  Company='Alabama' and Status ='Failed'";
 	   
@@ -42,87 +42,87 @@ public class AppConfig
 		   switch(company)
 		   {
 		   case "Austin":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "California":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "California pfw":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Chattanooga":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Chicago":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Colorado Springs":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Kansas City":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Houston":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Maine":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Savannah":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "North Carolina":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Alabama":
-			   return "40010,40011,40012, 40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029,40051,40061";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029,40051,40061";
 		   case "Arkansas":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Dallas/Fort Worth":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Indiana":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Little Rock":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "San Antonio":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Tulsa":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029,20030";
 		   case "Georgia":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "OKC":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "South Carolina":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Florida":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Tennessee":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "New Mexico":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Ohio":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Pennsylvania":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Lake Havasu":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Saint Louis":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Maryland":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Virginia":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Boise":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Idaho Falls":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Utah":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Montana":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Spokane":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Columbia - St Louis":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Arizona":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "New Jersey":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Hawaii":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Washington DC":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 		   case "Delaware":
-			   return "40010 - Rent Income";
+			   return "40010,40011,40012,40013,40014,40015,40016,40017,40018,40019,40020,40021,40022,40023,40024,40025,40026,40027,40028,40029";
 			      
 		   }
 		   return "";
