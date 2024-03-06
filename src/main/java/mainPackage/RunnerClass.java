@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -286,29 +287,34 @@ public class RunnerClass {
     
    @SuppressWarnings("deprecation")
    @AfterMethod
-   public void tearDown() {
+   public void tearDown() throws IOException, InterruptedException {
 	   ChromeDriver driver = driverThreadLocal.get();
-	    try {
-	        if (driver != null) {
-	            // Attempt to close the browser window
-	            driver.close();
-	            
-	            // Wait for a short period for the browser process to terminate
-	            Thread.sleep(2000);
-	            
-	            // Check if the WebDriver process is still running
-	            if (isProcessRunning(driver)) {
-	                // If the process is still running, forcibly kill it
-	                driver.quit();
-	                killChromeDriverProcess();
-	                //Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe"); // For Windows
-	            }
-	        }
-	    } catch (Exception e) {
-	    	System.out.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
-	    }
-	    driverThreadLocal.remove();
-	}
+	   try {
+	       if (driver != null) {
+	           // Close the browser window
+	           driver.close();
+	           
+	           // Check if the WebDriver process is still running
+	           if (isProcessRunning(driver)) {
+	               // If the process is still running, forcibly kill it
+	               driver.quit();
+	               killChromeDriverProcess();
+	           }
+	       }
+	   } catch (WebDriverException e) {
+	       System.out.println("WebDriverException occurred while quitting the driver: " + e.getMessage());
+	   } finally {
+	       // Ensure proper cleanup
+	       try {
+	           // Wait for a short period for the browser process to terminate
+	           Thread.sleep(2000);
+	       } catch (InterruptedException ignored) {
+	           Thread.currentThread().interrupt();
+	       }
+	       // Remove the driver from the thread local
+	       driverThreadLocal.remove();
+	   }
+   }
    
   /* @AfterTest
    public void tearDownReports() {
@@ -327,14 +333,28 @@ public class RunnerClass {
 	    }
 	}
 	
-	private void killChromeDriverProcess() throws IOException, InterruptedException {
-	    ProcessBuilder processBuilder = new ProcessBuilder("taskkill /F /IM chromedriver.exe"); // For Windows
-	    // ProcessBuilder processBuilder = new ProcessBuilder("pkill", "-f", "chromedriver"); // For Unix/Linux
-	    processBuilder.inheritIO(); // Redirects the input/output/error streams of the spawned process to the current Java process
-	    Process process = processBuilder.start();
-	    int exitCode = process.waitFor(); // Wait for the process to terminate
-	    if (exitCode != 0) {
-	        System.out.println("Failed to kill chromedriver process.");
+	public void killChromeDriverProcess() {
+	    String os = System.getProperty("os.name").toLowerCase();
+	    String processName = "";
+
+	    // Determine the process name based on the operating system
+	    if (os.contains("win")) {
+	        processName = "chromedriver.exe";
+	    } else if (os.contains("mac")) {
+	        processName = "chromedriver";
+	    } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+	        processName = "chromedriver";
+	    } else {
+	        System.out.println("Unsupported operating system: " + os);
+	        return;
+	    }
+
+	    try {
+	        // Execute platform-specific command to kill the process
+	        Runtime.getRuntime().exec("pkill -f " + processName); // For Unix-like systems
+	        // Runtime.getRuntime().exec("taskkill /F /IM " + processName); // For Windows
+	    } catch (IOException e) {
+	        System.out.println("Error killing ChromeDriver process: " + e.getMessage());
 	    }
 	}
    
