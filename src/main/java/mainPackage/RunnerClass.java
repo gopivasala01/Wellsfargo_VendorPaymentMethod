@@ -297,7 +297,7 @@ public class RunnerClass {
 	           // Check if the WebDriver process is still running
 	           if (isProcessRunning(driver)) {
 	               // If the process is still running, forcibly kill it
-	               driver.quit();
+	               driver.close();
 	               killChromeDriverProcess();
 	           }
 	       }
