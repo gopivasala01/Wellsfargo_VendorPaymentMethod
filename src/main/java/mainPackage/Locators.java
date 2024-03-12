@@ -73,7 +73,8 @@ public class Locators
     
     public static By portfolioText = By.xpath("//*[@class='summaryPanelSection3']/a[1]");
     public static By noAutoCharges = By.xpath("//*[text()='No Charges']");
-    public static By baseRent = By.xpath("//*[text()='Base Rent']/following::input[1]");
+    public static By RefNumber = By.name("check.refNo");
+    public static By errorMessage =By.id("errorMessages");
     		
 
 }

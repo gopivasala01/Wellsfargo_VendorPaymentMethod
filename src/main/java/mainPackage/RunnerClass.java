@@ -11,19 +11,10 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -36,41 +27,12 @@ public class RunnerClass {
 	
 	public static String previousRecordCompany;
 	public static boolean loggedOut = false;
-	public static ExtentSparkReporter htmlReporter;
-	 
-	public static ExtentReports extent;
-    //helps to generate the logs in the test report.
-	public static ExtentTest test;
-    
 
     // Use ThreadLocal to store a separate ChromeDriver instance for each thread
     private static ThreadLocal<ChromeDriver> driverThreadLocal = new ThreadLocal<ChromeDriver>();
-    private static ThreadLocal<String> baseRentAmountThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<String> portfolioNameThreadLocal = new ThreadLocal<>();
-    private static ThreadLocal<String> baseRentFromPWThreadLocal = new ThreadLocal<>();
     private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
     
     
-  /*  @BeforeClass
-    public static void startReport() {
-        // initialize the HtmlReporter
-        htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") +"/ExtentReports/testReport.html");
- 
-        //initialize ExtentReports and attach the HtmlReporter
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
- 
- 
-        //configuration items to change the look and feel
-        //add content, manage tests etc
-        htmlReporter.config().setDocumentTitle("Simple Automation Report");
-        htmlReporter.config().setReportName("Base Rent Report");
-        htmlReporter.config().setTheme(Theme.STANDARD);
-        htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
-        
-    }*/
- 
-
     @BeforeMethod
     public boolean setUp(){
         // Set up WebDriverManager to automatically download and set up ChromeDriver
@@ -84,7 +46,7 @@ public class RunnerClass {
     		    prefs.put("download.default_directory",RunnerClass.downloadFilePath);
     	        ChromeOptions options = new ChromeOptions();
     	        options.addArguments("--remote-allow-origins=*");
-    	        options.addArguments("--headless");
+    	       // options.addArguments("--headless");
     	        options.addArguments("--disable-gpu");  //GPU hardware acceleration isn't needed for headless
     	        options.addArguments("--no-sandbox");  //Disable the sandbox for all software features
     	        options.addArguments("--disable-dev-shm-usage");  //Overcome limited resource problems
@@ -126,13 +88,10 @@ public class RunnerClass {
     }
 
     @Test(dataProvider = "testData")
-    public void testMethod(String ID,String company, String leaseEntityID,String dateDifference,String moveInDate) throws Exception {
-    	String portfolioName="";
-    	String baseRentAmount ="";
-    	String baseRentFromPW="";
+    public void testMethod(String ID,String company, String paymentEntityID,String checkNumber) throws Exception {
     	String failedReason="";
     	
-    	System.out.println("<-------- "+leaseEntityID+" -------->");
+    	System.out.println("<-------- "+paymentEntityID+" -------->");
     	// Retrieve the thread-specific ChromeDriver instance from ThreadLocal
         ChromeDriver driver = driverThreadLocal.get();
         if(company.equalsIgnoreCase("Chicago PFW")) {
@@ -154,61 +113,29 @@ public class RunnerClass {
 			}
 		}
 		catch(Exception e) {}
-		if (PropertyWare.selectLease(driver,company,leaseEntityID) == false) {
-			portfolioName = getPortfolioName();
+		if (PropertyWare.selectLease(driver,company,paymentEntityID) == false) {
 			failedReason = getFailedReason();
-			String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
+			String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
 			DataBase.updateTable(query);
 			previousRecordCompany = company;	
-			portfolioName="";
-	    	baseRentAmount ="";
-	    	baseRentFromPW="";
 	    	failedReason="";
 			
 		}
 		else {
-			portfolioName = getPortfolioName();
-			//loggedOut = false;
-			//previousRecordCompany = company;
-			if (UpdateBaseRent.getBaseRentAmount(driver,company,dateDifference,moveInDate) == false) {
-				baseRentAmount = getBaseRentAmount();
-				baseRentFromPW = getBaseRentFromPW();
-				failedReason = getFailedReason();
-				String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"
-						+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-						+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
-				DataBase.updateTable(query);
-				portfolioName="";
-		    	baseRentAmount ="";
-		    	baseRentFromPW="";
-		    	failedReason="";
-				
-			}
-			else {
-				baseRentAmount = getBaseRentAmount();
-				baseRentFromPW = getBaseRentFromPW();
-				if (UpdateBaseRent.updateBaseRent(driver) == false) {
+				if (UpdatePaymentCheckNumber.updateCheckNumber(driver,checkNumber) == false) {
 					failedReason = getFailedReason();
-					String query = "Update Automation.BaseRentUpdate set Automation_Status='Failed',Automation_Notes='"
-							+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-							+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
+					String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"
+							+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
 					DataBase.updateTable(query);
-					portfolioName="";
-			    	baseRentAmount ="";
-			    	baseRentFromPW="";
 			    	failedReason="";
 				}
 				else {
 					// Update table for successful lease
 					try {
-						System.out.println("Base Rent Updated");
+						System.out.println("Check Number Updated");
 						failedReason = getFailedReason();
-						String query = "Update Automation.BaseRentUpdate set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate(),BaseRentFromAutoCharges='"
-								+ baseRentAmount + "',BaseRentFromPW = '" + baseRentFromPW + "',PortfolioName ='"+ portfolioName.replace("'", "''") +"' where ID = '" + ID + "'";
+						String query = "Update WF_DailyPayments set AutomationStatus='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
 						DataBase.updateTable(query);
-						portfolioName="";
-				    	baseRentAmount ="";
-				    	baseRentFromPW="";
 				    	failedReason="";
 						
 					} catch (Exception e) {}
@@ -216,44 +143,7 @@ public class RunnerClass {
 			}
 		}
 		
-    }
-
-    public static String getBaseRentAmount() {
-    	if(baseRentAmountThreadLocal.get().isEmpty()) {
-    		return "";
-    	}
-    	else {
-    		 return baseRentAmountThreadLocal.get();
-    	}
-    }
-
-    public static void setBaseRentAmount(String baseRentAmount) {
-        baseRentAmountThreadLocal.set(baseRentAmount);
-    }
-    public static String getPortfolioName() {
-    	if(portfolioNameThreadLocal.get().isEmpty()) {
-    		return "";
-    	}
-    	else {
-    		 return portfolioNameThreadLocal.get();
-    	}
-    }
-
-    public static void setPortfolioName(String portfolioName) {
-    	portfolioNameThreadLocal.set(portfolioName);
-    }
-    public static String getBaseRentFromPW() {
-    	if(baseRentFromPWThreadLocal.get().isEmpty()) {
-    		return "";
-    	}
-    	else {
-    		 return baseRentFromPWThreadLocal.get();
-    	}
-    }
-
-    public static void setBaseRentFromPW(String baseRentFromPW) {
-    	baseRentFromPWThreadLocal.set(baseRentFromPW);
-    }
+    
     public static String getFailedReason() {
     	if(failedReasonThreadLocal.get().isEmpty()) {
     		return "";

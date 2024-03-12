@@ -30,27 +30,16 @@ public class DataBase
 		            	rs.beforeFirst();
 		            }
 		            System.out.println("No of Rows = "+rows);
-		            RunnerClass.pendingLeases = new String[rows][5];
+		            RunnerClass.pendingLeases = new String[rows][4];
 		           int  i=0;
 		            while(rs.next())
 		            {
 		            	String 	ID =  rs.getObject(1).toString();
 		            	String 	company =  (String) rs.getObject(2);
-		                String  leaseEntityID = rs.getObject(3).toString();
-		                String dateDifference = null;
-		                if(rs.getObject(4) == null) {
-		                	dateDifference = "";
-		                }
-		                else {
-		                	dateDifference = rs.getObject(4).toString();
-		                }
-		                
-		                String moveInDate = null;
-		                if(rs.getObject(5) == null) {
-		                	moveInDate = "";
-		                }else {
-		                	moveInDate = rs.getObject(5).toString(); 
-		                }
+		                String  paymentEntityID = rs.getObject(3).toString();
+		                String checkNumber = rs.getObject(4).toString();;
+		               
+		               
 		               
 		    			//ID
 		                try 
@@ -73,7 +62,7 @@ public class DataBase
 		              //leaseEntityID
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][2] = leaseEntityID;
+		    				RunnerClass.pendingLeases[i][2] = paymentEntityID;
 		                }
 		                catch(Exception e)
 		                {
@@ -82,23 +71,13 @@ public class DataBase
 		              //DataDifference between moveindate and today
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][3] = dateDifference;
+		    				RunnerClass.pendingLeases[i][3] = checkNumber;
 		                }
 		                catch(Exception e)
 		                {
 		                	RunnerClass.pendingLeases[i][3] = "";
 		                }
-		              //moveINDate
-		                try 
-		                {
-		    				RunnerClass.pendingLeases[i][4] = moveInDate;
-		                }
-		                catch(Exception e)
-		                {
-		                	RunnerClass.pendingLeases[i][4] = "";
-		                }
-		              
-		    				i++;
+		    			i++;
 		            }	
 		            System.out.println("Total Pending Leases  = " +RunnerClass.pendingLeases.length);
 		            rs.close();

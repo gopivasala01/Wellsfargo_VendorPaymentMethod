@@ -19,7 +19,7 @@ public class PropertyWare
 {
 	
 	
-	public static boolean selectLease(WebDriver driver,String company, String leaseEntityID)
+	public static boolean selectLease(WebDriver driver,String company, String paymentEntityID)
 	{
 		String failedReason = "";
 		try
@@ -40,34 +40,25 @@ public class PropertyWare
 	        marketDropdownList.selectByVisibleText(marketName);
 	        Thread.sleep(3000);
 	        }
-	        String buildingPageURL = AppConfig.buildingPageURL+ leaseEntityID;
-	        driver.navigate().to(buildingPageURL);
+	        try {
+	        	String buildingPageURL = AppConfig.paymentPageURL+ paymentEntityID;
+	 	        driver.navigate().to(buildingPageURL);
+	        }
+	    	catch(Exception e)
+			{
+	    		failedReason= "Payment Entity ID Issue";
+				RunnerClass.setFailedReason(failedReason);
+				return false;
+			}
+	       
 	        if(PropertyWare.permissionDeniedPage(driver)==true)
 	        {
-	        	System.out.println("Wrong Lease Entity ID");
-	        	failedReason = "Wrong Lease Entity ID";
+	        	System.out.println("Wrong Payment Entity ID");
+	        	failedReason = "Wrong Payment Entity ID";
 	        	RunnerClass.setFailedReason(failedReason);
 	        	return false;
 	        }
 	        PropertyWare.intermittentPopUp(driver);
-	        if(PropertyWare.checkIfBuildingIsDeactivated(driver)==true)
-	        {
-	        	return false;
-	        }
-	        String portfolioName = driver.findElement(Locators.portfolioName).getText();
-	        RunnerClass.setPortfolioName(portfolioName);
-	        String status = driver.findElement(Locators.status).getText();
-	        if(status.equalsIgnoreCase("ACTIVE") || status.equalsIgnoreCase("Active - Month to Month") || status.equalsIgnoreCase("Active - TTO") || status.equalsIgnoreCase("Active - Notice Given")){
-	        	System.out.println("Status = " + status);
-	        	//RunnerClass.failedReason = "Lease is Active";
-	        	return true;
-	        }
-	        else {
-	        	System.out.println("Status = " + status);
-	        	failedReason = "Lease is not Active";
-	        	RunnerClass.setFailedReason(failedReason);
-	        	return false;
-	        }
 		}
 		catch(Exception e)
 		{
@@ -75,6 +66,7 @@ public class PropertyWare
 			RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
+		return true;
 	}
 	public static void intermittentPopUp(WebDriver driver)
 	{
