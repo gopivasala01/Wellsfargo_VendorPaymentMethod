@@ -1,17 +1,17 @@
 package mainPackage;
 
-import java.io.IOException;
+
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -22,6 +22,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class RunnerClass {
 	
     public static String[][] pendingLeases;
+    public static String[][] completedBuildingList;
 	public static String downloadFilePath;
 	public static WebDriverWait wait;
 	
@@ -46,7 +47,7 @@ public class RunnerClass {
     		    prefs.put("download.default_directory",RunnerClass.downloadFilePath);
     	        ChromeOptions options = new ChromeOptions();
     	        options.addArguments("--remote-allow-origins=*");
-    	       // options.addArguments("--headless");
+    	        options.addArguments("--headless");
     	        options.addArguments("--disable-gpu");  //GPU hardware acceleration isn't needed for headless
     	        options.addArguments("--no-sandbox");  //Disable the sandbox for all software features
     	        options.addArguments("--disable-dev-shm-usage");  //Overcome limited resource problems
@@ -178,4 +179,15 @@ public class RunnerClass {
 		}
         return pendingLeases;
     }
+    
+    @AfterSuite
+    public void sendMail(){
+    	try {
+			CommonMethods.excelCreationWithQuery();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
 }
