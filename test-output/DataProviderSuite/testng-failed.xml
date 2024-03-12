@@ -7,7 +7,6 @@
         <methods>
           <include name="setUp"/>
           <include name="testMethod"/>
-          <include name="tearDown"/>
         </methods>
       </class> <!-- mainPackage.RunnerClass -->
     </classes>
