@@ -21,12 +21,12 @@ public class UpdatePaymentCheckNumber {
 			// RunnerClass.baseRentFromPW = UpdatedBaseRentFieldValue;
 			
 			if (AppConfig.saveButtonOnAndOff == false) {
-				actions.moveToElement(driver.findElement(Locators.cancelLease)).build().perform();
-				driver.findElement(Locators.cancelLease).click();
+				actions.moveToElement(driver.findElement(Locators.cancelPayment)).build().perform();
+				driver.findElement(Locators.cancelPayment).click();
 				return true;
 			} else {
-				actions.moveToElement(driver.findElement(Locators.saveLease)).build().perform();
-				driver.findElement(Locators.saveLease).click();
+				actions.moveToElement(driver.findElement(Locators.savePayment)).build().perform();
+				driver.findElement(Locators.savePayment).click();
 				PropertyWare.evictionPopUp(driver);
 				Thread.sleep(2000);
 				try {

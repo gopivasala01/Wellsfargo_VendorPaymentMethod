@@ -113,66 +113,58 @@ public class RunnerClass {
 			}
 		}
 		catch(Exception e) {}
-		if (PropertyWare.selectLease(driver,company,paymentEntityID) == false) {
-			failedReason = getFailedReason();
-			String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
-			DataBase.updateTable(query);
-			previousRecordCompany = company;	
-	    	failedReason="";
-			
-		}
-		else {
-				if (UpdatePaymentCheckNumber.updateCheckNumber(driver,checkNumber) == false) {
-					failedReason = getFailedReason();
-					String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"
-							+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
-					DataBase.updateTable(query);
-			    	failedReason="";
-				}
-				else {
-					// Update table for successful lease
-					try {
-						System.out.println("Check Number Updated");
-						failedReason = getFailedReason();
-						String query = "Update WF_DailyPayments set AutomationStatus='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
-						DataBase.updateTable(query);
-				    	failedReason="";
-						
-					} catch (Exception e) {}
-				}
+		try {
+			if (PropertyWare.selectLease(driver,company,paymentEntityID) == false) {
+				failedReason = getFailedReason();
+				String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
+				DataBase.updateTable(query);
+				previousRecordCompany = company;	
+				
 			}
+			else {
+					if (UpdatePaymentCheckNumber.updateCheckNumber(driver,checkNumber) == false) {
+						failedReason = getFailedReason();
+						String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"
+								+ failedReason + "',Automation_CompletionDate = getdate() where ID = '" + ID + "'";
+						DataBase.updateTable(query);
+					}
+					else {
+						// Update table for successful lease
+						try {
+							System.out.println("Check Number Updated");
+							failedReason = getFailedReason();
+							if(failedReason == null) {
+								failedReason="";
+							}
+							String query = "Update WF_DailyPayments set AutomationStatus='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
+							DataBase.updateTable(query);
+							
+						} catch (Exception e) {}
+					}
+				}
+		}
+		catch(Exception e) {}
+		finally {
+			setFailedReason(null);
+		}
+	
 		}
 		
     
     public static String getFailedReason() {
-    	if(failedReasonThreadLocal.get().isEmpty()) {
-    		return "";
+    	try {
+        	return failedReasonThreadLocal.get();
     	}
-    	else {
-    		 return failedReasonThreadLocal.get();
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		return null;
     	}
+		
     }
 
     public static void setFailedReason(String failedReason) {
     	failedReasonThreadLocal.set(failedReason);
     }
-    
-        
-        
-        // Add your test code here
-
-  /*  @AfterMethod
-    public void getResult(ITestResult result) {
-        if(result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL,result.getThrowable());
-        }
-        else if(result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, result.getTestName());
-        }
-        else {
-            test.log(Status.SKIP, result.getTestName());
-        }
-    } */
  
     
    @SuppressWarnings("deprecation")

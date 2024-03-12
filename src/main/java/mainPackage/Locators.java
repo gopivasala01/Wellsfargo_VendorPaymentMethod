@@ -53,8 +53,8 @@ public class Locators
     
     public static By status = By.xpath("//*[@id='infoTable']/tbody/tr[6]/td[2]");
     
-    public static By saveLease = By.xpath("(//*[@class='primaryButtons'])[2]/input[1]");
-    public static By cancelLease = By.xpath("(//*[@class='primaryButtons'])[2]/input[2]");
+    public static By savePayment = By.xpath("//*[@value='Save']");
+    public static By cancelPayment = By.xpath("//input[@value='Cancel']");
     
     public static By saveBuilding = By.xpath("(//*[@class='primaryButtons'])[2]/input[1]");
     public static By cancelBuilding = By.xpath("(//*[@class='primaryButtons'])[2]/input[4]");

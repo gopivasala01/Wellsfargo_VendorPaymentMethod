@@ -29,7 +29,7 @@ public class AppConfig
 	   
 	  // public static String leaseFetchQuery  = "Select Company, Building,leaseName from Automation.InitialRentsUpdate where Status ='Pending' and Company ='Georgia'";
 	   
-	   public static String pendingLeasesQuery = "Select top 50 ID, Company, PaymentEntityID, CheckNumber from WF_DailyPayments where VendorPaymentMethod  ='Check'";
+	   public static String pendingLeasesQuery = "Select top 50 ID, Company, PaymentEntityID, CheckNumber from WF_DailyPayments where VendorPaymentMethod  ='Check' and PaymentEntityID ='5541101777'";
 	   
 	   public static String failedLeasesQuery = "Select Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where  Company='Alabama' and Status ='Failed'";
 	   

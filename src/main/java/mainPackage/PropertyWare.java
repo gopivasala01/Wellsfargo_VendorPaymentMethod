@@ -30,16 +30,13 @@ public class PropertyWare
 	        driver.navigate().refresh();
 	        Thread.sleep(3000);
 	        PropertyWare.intermittentPopUp(driver);
-	        //if(PropertyWare.checkIfBuildingIsDeactivated()==true)
-	        	//return false;
-	        //if(RunnerClass.previousRecordCompany==null||!RunnerClass.previousRecordCompany.equals(company)||RunnerClass.previousRecordCompany.equals("") || RunnerClass.loggedOut == true)
-	        {
+	       
 	        driver.findElement(Locators.marketDropdown).click();
 	        String marketName = "HomeRiver Group - "+company;
 	        Select marketDropdownList = new Select(driver.findElement(Locators.marketDropdown));
 	        marketDropdownList.selectByVisibleText(marketName);
 	        Thread.sleep(3000);
-	        }
+	        
 	        try {
 	        	String buildingPageURL = AppConfig.paymentPageURL+ paymentEntityID;
 	 	        driver.navigate().to(buildingPageURL);
@@ -62,7 +59,7 @@ public class PropertyWare
 		}
 		catch(Exception e)
 		{
-			failedReason= "Lease not found";
+			failedReason= "Payment Page not found";
 			RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
