@@ -19,7 +19,7 @@ public class UpdatePaymentCheckNumber {
 			driver.findElement(Locators.RefNumber).sendKeys(checkNumber);
 			String updatedCheckNumberFieldValue = driver.findElement(Locators.RefNumber).getAttribute("value");
 			// RunnerClass.baseRentFromPW = UpdatedBaseRentFieldValue;
-			System.out.println("Updated Check Number = " + updatedCheckNumberFieldValue);
+			
 			if (AppConfig.saveButtonOnAndOff == false) {
 				actions.moveToElement(driver.findElement(Locators.cancelLease)).build().perform();
 				driver.findElement(Locators.cancelLease).click();
@@ -31,14 +31,16 @@ public class UpdatePaymentCheckNumber {
 				Thread.sleep(2000);
 				try {
 					driver.switchTo().alert().accept();
-					failedReason = failedReason + "";
+					failedReason = "";
+					System.out.println("Updated Check Number = " + updatedCheckNumberFieldValue);
 					RunnerClass.setFailedReason(failedReason);
 				} catch (Exception e) {
 				}
 
 				try {
 					if (driver.findElement(Locators.errorMessage).isDisplayed()) {
-						failedReason = failedReason + "Check Number could not be saved";
+						failedReason = failedReason + "There is an error while saving Check Number";
+						System.out.println("Check Number = " + updatedCheckNumberFieldValue);
 						RunnerClass.setFailedReason(failedReason);
 						return false;
 					}
