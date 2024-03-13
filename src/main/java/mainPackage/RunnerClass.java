@@ -47,7 +47,7 @@ public class RunnerClass {
     		    prefs.put("download.default_directory",RunnerClass.downloadFilePath);
     	        ChromeOptions options = new ChromeOptions();
     	        options.addArguments("--remote-allow-origins=*");
-    	        options.addArguments("--headless");
+    	        //options.addArguments("--headless");
     	        options.addArguments("--disable-gpu");  //GPU hardware acceleration isn't needed for headless
     	        options.addArguments("--no-sandbox");  //Disable the sandbox for all software features
     	        options.addArguments("--disable-dev-shm-usage");  //Overcome limited resource problems
@@ -89,10 +89,10 @@ public class RunnerClass {
     }
 
     @Test(dataProvider = "testData")
-    public void testMethod(String ID,String company, String paymentEntityID,String checkNumber) throws Exception {
+    public void testMethod(String company, String VendorEntityID,String VendorPaymentMethod) throws Exception {
     	String failedReason="";
     	
-    	System.out.println("<-------- "+paymentEntityID+" -------->");
+    	System.out.println("<-------- "+VendorEntityID+" Company = "+company+" -------->");
     	// Retrieve the thread-specific ChromeDriver instance from ThreadLocal
         ChromeDriver driver = driverThreadLocal.get();
         if(company.equalsIgnoreCase("Chicago PFW")) {
@@ -115,18 +115,18 @@ public class RunnerClass {
 		}
 		catch(Exception e) {}
 		try {
-			if (PropertyWare.selectLease(driver,company,paymentEntityID) == false) {
+			if (PropertyWare.selectLease(driver,company,VendorEntityID) == false) {
 				failedReason = getFailedReason();
-				String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
+				String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where VendorEntityID = '" + VendorEntityID + "'";
 				DataBase.updateTable(query);
 				previousRecordCompany = company;	
 				
 			}
 			else {
-					if (UpdatePaymentCheckNumber.updateCheckNumber(driver,checkNumber) == false) {
+					if (UpdateVendorPaymentMethod.updateVendorPayment(driver,VendorPaymentMethod) == false) {
 						failedReason = getFailedReason();
-						String query = "Update WF_DailyPayments set AutomationStatus='Failed',Automation_Notes='"
-								+ failedReason + "',Automation_CompletionDate = getdate() where ID = '" + ID + "'";
+						String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Failed',Automation_Notes='"
+								+ failedReason + "',Automation_CompletionDate = getdate() where VendorEntityID = '" + VendorEntityID + "'";
 						DataBase.updateTable(query);
 					}
 					else {
@@ -137,7 +137,7 @@ public class RunnerClass {
 							if(failedReason == null) {
 								failedReason="";
 							}
-							String query = "Update WF_DailyPayments set AutomationStatus='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where ID = '" + ID + "'";
+							String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where VendorEntityID = '" + VendorEntityID +"'";
 							DataBase.updateTable(query);
 							
 						} catch (Exception e) {}

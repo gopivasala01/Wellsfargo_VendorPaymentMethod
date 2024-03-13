@@ -30,52 +30,49 @@ public class DataBase
 		            	rs.beforeFirst();
 		            }
 		            System.out.println("No of Rows = "+rows);
-		            RunnerClass.pendingLeases = new String[rows][4];
+		            RunnerClass.pendingLeases = new String[rows][3];
 		           int  i=0;
 		            while(rs.next())
 		            {
-		            	String 	ID =  rs.getObject(1).toString();
-		            	String 	company =  (String) rs.getObject(2);
-		                String  paymentEntityID = rs.getObject(3).toString();
-		                String checkNumber = rs.getObject(4).toString();;
+		            	
+		            	String 	company =  (String) rs.getObject(1);
+		                String  vendorEntityID = rs.getObject(2).toString();
+		                Object object = rs.getObject(3);
+		                String vendorPaymentMethod = null; // Default value in case rs.getObject(3) is null
+
+		                if (object != null) {
+		                    vendorPaymentMethod = object.toString();
+		                }
 		               
 		               
 		               
-		    			//ID
+		    			
+		              //Company
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][0] = ID;
+		    				RunnerClass.pendingLeases[i][0] = company;
 		                }
 		                catch(Exception e)
 		                {
 		                	RunnerClass.pendingLeases[i][0] = "";
 		                }
-		              //Company
+		              //leaseEntityID
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][1] = company;
+		    				RunnerClass.pendingLeases[i][1] = vendorEntityID;
 		                }
 		                catch(Exception e)
 		                {
 		                	RunnerClass.pendingLeases[i][1] = "";
 		                }
-		              //leaseEntityID
+		              //DataDifference between moveindate and today
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][2] = paymentEntityID;
+		    				RunnerClass.pendingLeases[i][2] = vendorPaymentMethod;
 		                }
 		                catch(Exception e)
 		                {
 		                	RunnerClass.pendingLeases[i][2] = "";
-		                }
-		              //DataDifference between moveindate and today
-		                try 
-		                {
-		    				RunnerClass.pendingLeases[i][3] = checkNumber;
-		                }
-		                catch(Exception e)
-		                {
-		                	RunnerClass.pendingLeases[i][3] = "";
 		                }
 		    			i++;
 		            }	

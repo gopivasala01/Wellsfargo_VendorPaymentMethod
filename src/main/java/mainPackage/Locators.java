@@ -53,8 +53,8 @@ public class Locators
     
     public static By status = By.xpath("//*[@id='infoTable']/tbody/tr[6]/td[2]");
     
-    public static By savePayment = By.xpath("//*[@value='Save']");
-    public static By cancelPayment = By.xpath("//input[@value='Cancel']");
+    public static By savePayment = By.xpath("(//*[@value='Save'])[1]");
+    public static By cancelPayment = By.xpath("(//*[@value='Cancel'])[1]");
     
     public static By saveBuilding = By.xpath("(//*[@class='primaryButtons'])[2]/input[1]");
     public static By cancelBuilding = By.xpath("(//*[@class='primaryButtons'])[2]/input[4]");
@@ -73,8 +73,11 @@ public class Locators
     
     public static By portfolioText = By.xpath("//*[@class='summaryPanelSection3']/a[1]");
     public static By noAutoCharges = By.xpath("//*[text()='No Charges']");
-    public static By RefNumber = By.name("check.refNo");
+    public static By vendorPaymentMethodDropDown = By.xpath("//*[contains(text(),\"Vendor Payment Method\")]/following-sibling::td/select");
     public static By errorMessage =By.id("errorMessages");
+    
+    
+    public static By edtVendor = By.xpath("//*[@value='Edit Vendor']");
     		
 
 }

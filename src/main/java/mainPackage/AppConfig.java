@@ -11,7 +11,7 @@ public class AppConfig
 	   public static String excelFileLocation = "D:\\Automation\\WellsFargo_CheckNumber";
 	   public static String downloadFilePath = "C:\\SantoshMurthyP\\Initial Rents Update - Branches\\Tennessee";
 	   
-	   public static String paymentPageURL = "https://app.propertyware.com/pw/moneyout/edit_check.do?action=EditBillPayment&billPaymentID=";
+	   public static String vendorPaymentMethodPageURL = "https://app.propertyware.com/pw/moneyout/vendor_detail.do?entityID=";
 	   //Mail credentials
 	   public static String fromEmail = "bireports@beetlerim.com";
 	   public static String fromEmailPassword = "Welcome@123";
@@ -29,11 +29,11 @@ public class AppConfig
 	   
 	  // public static String leaseFetchQuery  = "Select Company, Building,leaseName from Automation.InitialRentsUpdate where Status ='Pending' and Company ='Georgia'";
 	   
-	   public static String pendingLeasesQuery = "Select top 10 ID, Company, PaymentEntityID, CheckNumber from WF_DailyPayments where VendorPaymentMethod  ='Check'";
+	   public static String pendingLeasesQuery = "Select top 10 Company, VendorEntityID, VendorPaymentMethod from Automation.WF_VendorPaymentMethodUpdate";
 	   
 	   public static String failedLeasesQuery = "Select Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where  Company='Alabama' and Status ='Failed'";
 	   
-	   public static String getBuildingsWithStatusforCurrentDay = "Select top 10 Company, PaymentEntityID, CheckNumber,AutomationStatus,Automation_Notes,Automation_CompletionDate from WF_DailyPayments where  AsOfDate= (Select MAX(Asofdate) from WF_DailyPayments)";
+	   public static String getBuildingsWithStatusforCurrentDay = "Select top 10 Company, VendorEntityID, VendorPaymentMethod,Automation_Status,Automation_Notes,Automation_CompletionDate from Automation.WF_VendorPaymentMethodUpdate where  AsOfDate= (Select MAX(Asofdate) from Automation.WF_VendorPaymentMethodUpdate)";
 	   
 	   
 	   public static String getMonthlyRentChargeCode(String company)

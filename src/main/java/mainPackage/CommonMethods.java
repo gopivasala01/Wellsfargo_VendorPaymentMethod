@@ -100,7 +100,7 @@ public class CommonMethods
         String filename ;
 		try   
 		{  
-		filename = AppConfig.excelFileLocation+"\\CheckNumberUpdate_"+date+".xlsx";  
+		filename = AppConfig.excelFileLocation+"\\PaymentMethodUpdate_"+date+".xlsx";  
 		File file = new File(filename);
 		//if file exists, delete and re create it
 		if(file.exists())
@@ -111,9 +111,9 @@ public class CommonMethods
 		Sheet sheet1 = wb.createSheet("Sheet 1");
 		Row header = sheet1.createRow(0);
 		header.createCell(0).setCellValue("Company");
-		header.createCell(1).setCellValue("PaymentEntityID");
-		header.createCell(2).setCellValue("CheckNumber");
-		header.createCell(3).setCellValue("AutomationStatus");
+		header.createCell(1).setCellValue("VendorEntityID");
+		header.createCell(2).setCellValue("VendorPaymentMethod");
+		header.createCell(3).setCellValue("Automation_Status");
 		header.createCell(4).setCellValue("Automation_Notes");
 		header.createCell(5).setCellValue("Automation_CompletionDate");
 
@@ -123,16 +123,16 @@ public class CommonMethods
 			for(int i=0;i<RunnerClass.completedBuildingList.length;i++)
 			{
 				String company = RunnerClass.completedBuildingList[i][0];
-				String PaymentEntityID = RunnerClass.completedBuildingList[i][1].trim();
-				String CheckNumber = RunnerClass.completedBuildingList[i][2].trim();
-				String AutomationStatus = RunnerClass.completedBuildingList[i][3];
+				String VendorEntityID = RunnerClass.completedBuildingList[i][1].trim();
+				String VendorPaymentMethod = RunnerClass.completedBuildingList[i][2].trim();
+				String Automation_Status = RunnerClass.completedBuildingList[i][3];
 				String Automation_Notes = RunnerClass.completedBuildingList[i][4];
 				String Automation_CompletionDate = RunnerClass.completedBuildingList[i][5];
 				Row row = sheet1.createRow(1+i);
 				row.createCell(0).setCellValue(company);
-				row.createCell(1).setCellValue(PaymentEntityID);
-				row.createCell(2).setCellValue(CheckNumber);
-				row.createCell(3).setCellValue(AutomationStatus);
+				row.createCell(1).setCellValue(VendorEntityID);
+				row.createCell(2).setCellValue(VendorPaymentMethod);
+				row.createCell(3).setCellValue(Automation_Status);
 				row.createCell(4).setCellValue(Automation_Notes);
 				row.createCell(5).setCellValue(Automation_CompletionDate);
 				

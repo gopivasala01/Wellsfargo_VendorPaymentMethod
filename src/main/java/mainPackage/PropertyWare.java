@@ -19,7 +19,7 @@ public class PropertyWare
 {
 	
 	
-	public static boolean selectLease(WebDriver driver,String company, String paymentEntityID)
+	public static boolean selectLease(WebDriver driver,String company, String vendorEntityID)
 	{
 		String failedReason = "";
 		try
@@ -38,20 +38,20 @@ public class PropertyWare
 	        Thread.sleep(3000);
 	        
 	        try {
-	        	String buildingPageURL = AppConfig.paymentPageURL+ paymentEntityID;
-	 	        driver.navigate().to(buildingPageURL);
+	        	String vendorPaymentPageURL = AppConfig.vendorPaymentMethodPageURL+ vendorEntityID;
+	 	        driver.navigate().to(vendorPaymentPageURL);
 	        }
 	    	catch(Exception e)
 			{
-	    		failedReason= "Payment Entity ID Issue";
+	    		failedReason= "Vendor Entity ID Issue";
 				RunnerClass.setFailedReason(failedReason);
 				return false;
 			}
 	       
 	        if(PropertyWare.permissionDeniedPage(driver)==true)
 	        {
-	        	System.out.println("Wrong Payment Entity ID");
-	        	failedReason = "Wrong Payment Entity ID";
+	        	System.out.println("Wrong Vendor Entity ID");
+	        	failedReason = "Wrong Vendor Entity ID";
 	        	RunnerClass.setFailedReason(failedReason);
 	        	return false;
 	        }
@@ -59,7 +59,7 @@ public class PropertyWare
 		}
 		catch(Exception e)
 		{
-			failedReason= "Payment Page not found";
+			failedReason= "Vendor Payment Page not found";
 			RunnerClass.setFailedReason(failedReason);
 			return false;
 		}
