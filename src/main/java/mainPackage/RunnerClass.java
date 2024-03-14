@@ -10,6 +10,7 @@ import javax.mail.MessagingException;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.devtools.v113.database.Database;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -32,6 +33,7 @@ public class RunnerClass {
     // Use ThreadLocal to store a separate ChromeDriver instance for each thread
     private static ThreadLocal<ChromeDriver> driverThreadLocal = new ThreadLocal<ChromeDriver>();
     private static ThreadLocal<String> failedReasonThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> companyThreadLocal = new ThreadLocal<>();
     
     
     @BeforeMethod
@@ -89,10 +91,20 @@ public class RunnerClass {
     }
 
     @Test(dataProvider = "testData")
-    public void testMethod(String company, String VendorEntityID,String VendorPaymentMethod) throws Exception {
+    public void testMethod(String VendorPaymentMethod,String VendorEntityID, String email) throws Exception {
     	String failedReason="";
-    	
-    	System.out.println("<-------- "+VendorEntityID+" Company = "+company+" -------->");
+    	String company="";
+    	try {
+    		setCompany(DataBase.getCompany(VendorEntityID));
+    		company = getCompany();
+    		
+    	}
+    	catch(Exception e) {
+    		company ="";
+    		
+    	}
+    
+    	System.out.println("<-------- "+VendorEntityID+" -------->");
     	// Retrieve the thread-specific ChromeDriver instance from ThreadLocal
         ChromeDriver driver = driverThreadLocal.get();
         if(company.equalsIgnoreCase("Chicago PFW")) {
@@ -101,6 +113,9 @@ public class RunnerClass {
 		if(company.equalsIgnoreCase("California PFW")) {
 			   company = "California pfw";
 		  }
+		if(company.equalsIgnoreCase("Institutional Accounts (IAG)")) {
+			company = "Institutional Accounts";
+		}
 		try {
 			String expiredURL = driver.getCurrentUrl();
 			if(expiredURL.contains("https://app.propertyware.com/pw/expired.jsp") || expiredURL.equalsIgnoreCase("https://app.propertyware.com/pw/expired.jsp?cookie") || expiredURL.contains(AppConfig.URL)) {
@@ -117,16 +132,16 @@ public class RunnerClass {
 		try {
 			if (PropertyWare.selectLease(driver,company,VendorEntityID) == false) {
 				failedReason = getFailedReason();
-				String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where VendorEntityID = '" + VendorEntityID + "'";
+				String query = "Update DBO.WFDailyPaymentsReturnedFile set Automation_Status='Failed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where [Supplier ID] = '" + VendorEntityID + "'";
 				DataBase.updateTable(query);
-				previousRecordCompany = company;	
+				//previousRecordCompany = company;	
 				
 			}
 			else {
-					if (UpdateVendorPaymentMethod.updateVendorPayment(driver,VendorPaymentMethod) == false) {
+					if (UpdateVendorPaymentMethod.updateVendorPayment(driver,VendorPaymentMethod,email) == false) {
 						failedReason = getFailedReason();
-						String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Failed',Automation_Notes='"
-								+ failedReason + "',Automation_CompletionDate = getdate() where VendorEntityID = '" + VendorEntityID + "'";
+						String query = "Update DBO.WFDailyPaymentsReturnedFile set Automation_Status='Failed',Automation_Notes='"
+								+ failedReason + "',Automation_CompletionDate = getdate() where [Supplier ID] = '" + VendorEntityID + "'";
 						DataBase.updateTable(query);
 					}
 					else {
@@ -137,7 +152,7 @@ public class RunnerClass {
 							if(failedReason == null) {
 								failedReason="";
 							}
-							String query = "Update Automation.WF_VendorPaymentMethodUpdate set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where VendorEntityID = '" + VendorEntityID +"'";
+							String query = "Update DBO.WFDailyPaymentsReturnedFile set Automation_Status='Completed',Automation_Notes='"+ failedReason + "',Automation_CompletionDate =getdate() where [Supplier ID] = '" + VendorEntityID +"'";
 							DataBase.updateTable(query);
 							
 						} catch (Exception e) {}
@@ -166,6 +181,21 @@ public class RunnerClass {
 
     public static void setFailedReason(String failedReason) {
     	failedReasonThreadLocal.set(failedReason);
+    }
+    
+    public static String getCompany() {
+    	try {
+        	return companyThreadLocal.get();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+		
+    }
+
+    public static void setCompany(String company) {
+    	companyThreadLocal.set(company);
     }
  
 

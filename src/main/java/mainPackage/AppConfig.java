@@ -29,11 +29,11 @@ public class AppConfig
 	   
 	  // public static String leaseFetchQuery  = "Select Company, Building,leaseName from Automation.InitialRentsUpdate where Status ='Pending' and Company ='Georgia'";
 	   
-	   public static String pendingLeasesQuery = "Select top 10 Company, VendorEntityID, VendorPaymentMethod from Automation.WF_VendorPaymentMethodUpdate";
+	   public static String pendingLeasesQuery = "Select top 10 Status, [Supplier ID],[Supplier contact email] from DBO.WFDailyPaymentsReturnedFile  where [Supplier ID] in ('3268083799','4135780357','1560248386','1681358863')";
 	   
 	   public static String failedLeasesQuery = "Select Company, LeaseEntityID,DateDiff(Day,MoveInDate,Getdate()) as datedifference,moveInDate from Automation.BaseRentUpdate where  Company='Alabama' and Status ='Failed'";
 	   
-	   public static String getBuildingsWithStatusforCurrentDay = "Select top 10 Company, VendorEntityID, VendorPaymentMethod,Automation_Status,Automation_Notes,Automation_CompletionDate from Automation.WF_VendorPaymentMethodUpdate where  AsOfDate= (Select MAX(Asofdate) from Automation.WF_VendorPaymentMethodUpdate)";
+	   public static String getBuildingsWithStatusforCurrentDay = "Select top 4 Status, [Supplier ID],[Supplier contact email],Automation_Status,Automation_Notes,Automation_CompletionDate from DBO.WFDailyPaymentsReturnedFile where  [Latest update date]= (Select MAX([Latest update date]) from DBO.WFDailyPaymentsReturnedFile)";
 	   
 	   
 	   public static String getMonthlyRentChargeCode(String company)

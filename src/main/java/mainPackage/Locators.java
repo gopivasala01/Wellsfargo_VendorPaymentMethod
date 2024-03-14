@@ -75,7 +75,7 @@ public class Locators
     public static By noAutoCharges = By.xpath("//*[text()='No Charges']");
     public static By vendorPaymentMethodDropDown = By.xpath("//*[contains(text(),\"Vendor Payment Method\")]/following-sibling::td/select");
     public static By errorMessage =By.id("errorMessages");
-    
+    public static By email = By.name("entity.email");
     
     public static By edtVendor = By.xpath("//*[@value='Edit Vendor']");
     		

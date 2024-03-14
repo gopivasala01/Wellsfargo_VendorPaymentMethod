@@ -7,7 +7,7 @@
         <methods>
           <include name="sendMail"/>
           <include name="setUp"/>
-          <include name="testMethod" invocation-numbers="96 97 98 99 87 88 89 90 91 92 93 94 95"/>
+          <include name="testMethod" invocation-numbers="0"/>
         </methods>
       </class> <!-- mainPackage.RunnerClass -->
     </classes>

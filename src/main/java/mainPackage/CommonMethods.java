@@ -110,9 +110,9 @@ public class CommonMethods
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet1 = wb.createSheet("Sheet 1");
 		Row header = sheet1.createRow(0);
-		header.createCell(0).setCellValue("Company");
-		header.createCell(1).setCellValue("VendorEntityID");
-		header.createCell(2).setCellValue("VendorPaymentMethod");
+		header.createCell(0).setCellValue("Status");
+		header.createCell(1).setCellValue("Supplier ID");
+		header.createCell(2).setCellValue("Supplier contact email");
 		header.createCell(3).setCellValue("Automation_Status");
 		header.createCell(4).setCellValue("Automation_Notes");
 		header.createCell(5).setCellValue("Automation_CompletionDate");
@@ -122,16 +122,16 @@ public class CommonMethods
 		{
 			for(int i=0;i<RunnerClass.completedBuildingList.length;i++)
 			{
-				String company = RunnerClass.completedBuildingList[i][0];
-				String VendorEntityID = RunnerClass.completedBuildingList[i][1].trim();
-				String VendorPaymentMethod = RunnerClass.completedBuildingList[i][2].trim();
+				String status = RunnerClass.completedBuildingList[i][0];
+				String Supplier_ID = RunnerClass.completedBuildingList[i][1].trim();
+				String Supplier_contact_email = RunnerClass.completedBuildingList[i][2].trim();
 				String Automation_Status = RunnerClass.completedBuildingList[i][3];
 				String Automation_Notes = RunnerClass.completedBuildingList[i][4];
 				String Automation_CompletionDate = RunnerClass.completedBuildingList[i][5];
 				Row row = sheet1.createRow(1+i);
-				row.createCell(0).setCellValue(company);
-				row.createCell(1).setCellValue(VendorEntityID);
-				row.createCell(2).setCellValue(VendorPaymentMethod);
+				row.createCell(0).setCellValue(status);
+				row.createCell(1).setCellValue(Supplier_ID);
+				row.createCell(2).setCellValue(Supplier_contact_email);
 				row.createCell(3).setCellValue(Automation_Status);
 				row.createCell(4).setCellValue(Automation_Notes);
 				row.createCell(5).setCellValue(Automation_CompletionDate);

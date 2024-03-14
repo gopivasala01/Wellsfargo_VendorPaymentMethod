@@ -9,6 +9,9 @@ import java.sql.Statement;
 
 public class DataBase 
 {
+	
+	
+	
 	public static boolean getLeasesList(String pendingLeasesQuery) throws SocketException
 	{
 		try
@@ -34,29 +37,30 @@ public class DataBase
 		           int  i=0;
 		            while(rs.next())
 		            {
-		            	
-		            	String 	company =  (String) rs.getObject(1);
-		                String  vendorEntityID = rs.getObject(2).toString();
-		                Object object = rs.getObject(3);
-		                String vendorPaymentMethod = null; // Default value in case rs.getObject(3) is null
+		            	 Object object = rs.getObject(1);
+			                String vendorPaymentMethod = null; // Default value in case rs.getObject(3) is null
 
-		                if (object != null) {
-		                    vendorPaymentMethod = object.toString();
-		                }
+			                if (object != null) {
+			                    vendorPaymentMethod = object.toString();
+			                }
+		                String  vendorEntityID = rs.getObject(2).toString();
+		                String  email = rs.getObject(3).toString();
+		               
 		               
 		               
 		               
 		    			
-		              //Company
+		      
+		              //leaseEntityID
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][0] = company;
+		    				RunnerClass.pendingLeases[i][0] = vendorPaymentMethod;
 		                }
 		                catch(Exception e)
 		                {
 		                	RunnerClass.pendingLeases[i][0] = "";
 		                }
-		              //leaseEntityID
+		              //DataDifference between moveindate and today
 		                try 
 		                {
 		    				RunnerClass.pendingLeases[i][1] = vendorEntityID;
@@ -65,10 +69,9 @@ public class DataBase
 		                {
 		                	RunnerClass.pendingLeases[i][1] = "";
 		                }
-		              //DataDifference between moveindate and today
 		                try 
 		                {
-		    				RunnerClass.pendingLeases[i][2] = vendorPaymentMethod;
+		    				RunnerClass.pendingLeases[i][2] = email;
 		                }
 		                catch(Exception e)
 		                {
@@ -130,19 +133,20 @@ public class DataBase
 		            while(rs.next())
 		            {
 		            	
-		            	String 	company =  (String) rs.getObject(1);
-		                String  PaymentEntityID = (String) rs.getObject(2);
-		                String  CheckNumber = (String) rs.getObject(3);
+		            	String 	status =  (String) rs.getObject(1);
+		                String  Supplier_ID = (String) rs.getObject(2);
+		                String  Supplier_contact_email = (String) rs.getObject(3);
 		                String  AutomationStatus = (String) rs.getObject(4);
 		                String  Automation_Notes = (String) rs.getObject(5);
-		                String  Automation_CompletionDate = (String) rs.getObject(6);
-		                System.out.println(company +" | "+PaymentEntityID+" | "+CheckNumber+" | "+AutomationStatus+" | "+Automation_Notes+" | "+Automation_CompletionDate);
+		                java.util.Date date = (java.util.Date) rs.getObject(6);
+		                String Automation_CompletionDate = date != null ? date.toString() : null;
+		                System.out.println(status +" | "+Supplier_ID+" | "+Supplier_contact_email+" | "+AutomationStatus+" | "+Automation_Notes+" | "+Automation_CompletionDate);
 		    				//Company
-		    				RunnerClass.completedBuildingList[i][0] = company;
+		    				RunnerClass.completedBuildingList[i][0] = status;
 		    				//Port folio
-		    				RunnerClass.completedBuildingList[i][1] = PaymentEntityID;
+		    				RunnerClass.completedBuildingList[i][1] = Supplier_ID;
 		    				//Third Party Unit ID
-		    				RunnerClass.completedBuildingList[i][2] = CheckNumber;
+		    				RunnerClass.completedBuildingList[i][2] = Supplier_contact_email;
 		    				//Lease Name
 		    				RunnerClass.completedBuildingList[i][3] = AutomationStatus;
 		    				//Target Deposit
@@ -163,6 +167,65 @@ public class DataBase
 			e.printStackTrace();
 		 return false;
 		}
+	}
+	
+	
+	public static String getCompany(String vendorEntityID){
+		try
+		{
+		        Connection con = null;
+		        Statement stmt = null;
+		        ResultSet rs = null;
+		            //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		            con = DriverManager.getConnection(AppConfig.connectionUrl);
+		            String SQL ="Select top 1 Company from vendor_Dashboard where VendorEntityID ='"+ vendorEntityID + "'";
+		            stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		           // stmt = con.createStatement();
+		            rs = stmt.executeQuery(SQL);
+		            int rows =0;
+		            if (rs.last()) 
+		            {
+		            	rows = rs.getRow();
+		            	// Move to beginning
+		            	rs.beforeFirst();
+		            }
+		            if(rows>1 || rows == 0) {
+		            	return "";
+		            	
+		            }
+		            System.out.println("No of Rows = "+rows);
+		            String[][] companyFromVendorPayment = new String[rows][1];
+		           int  i=0;
+		            while(rs.next())
+		            {
+		            	
+		            	String 	company =  (String) rs.getObject(1);
+		             
+		              //Company
+		                try 
+		                {
+		                	companyFromVendorPayment[i][0] = company;
+		                }
+		                catch(Exception e)
+		                {
+		                	companyFromVendorPayment[i][0] = "";
+		                }
+		              
+		    			i++;
+		            }	
+		            System.out.println("Company  = " +companyFromVendorPayment[0][0]);
+		            rs.close();
+		            stmt.close();
+		            con.close();
+		 return companyFromVendorPayment[0][0];
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		 return "";
+		}
+		
+		
 	}
 	
 	

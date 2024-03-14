@@ -1,30 +1,44 @@
 package mainPackage;
 
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 
 public class UpdateVendorPaymentMethod {
 	
-	public static boolean updateVendorPayment(WebDriver driver,String vendorPaymentMethod) {
+	public static boolean updateVendorPayment(WebDriver driver,String vendorPaymentMethod, String email) {
 		String failedReason = "";
 		Actions actions = new Actions(driver);
 		try {
-			if(vendorPaymentMethod == null) {
+			driver.findElement(Locators.edtVendor).click();
+			if(vendorPaymentMethod.equalsIgnoreCase("Enrolled") || vendorPaymentMethod.equalsIgnoreCase("Follow Up - Enrolled")) {
 				vendorPaymentMethod = "VCC";
 			}
-			if(vendorPaymentMethod.contains("ACH")) {
+			else if(vendorPaymentMethod.contains("Verified")) {
 				vendorPaymentMethod = "ACH Epay";
 			}
-			System.out.println("Vendor payment Method is = "+vendorPaymentMethod);
-			driver.findElement(Locators.edtVendor).click();
+			else {
+				vendorPaymentMethod = "Check";
+			}
+			System.out.println("Vendor payment Method is from DB = "+vendorPaymentMethod);
 			Thread.sleep(2000);
+			//actions.moveToElement(driver.findElement(Locators.email)).build().perform();
+			driver.findElement(Locators.email).sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
+			driver.findElement(Locators.email).sendKeys(email);
 			actions.moveToElement(driver.findElement(Locators.vendorPaymentMethodDropDown)).build().perform();
 			Select select = new Select(driver.findElement(Locators.vendorPaymentMethodDropDown));
-			select.selectByVisibleText(vendorPaymentMethod);
-			
+			WebElement defaultElement = select.getFirstSelectedOption();
+			String defaultValue = defaultElement.getText();
+			System.out.println("Default Vendor payment Method in PW = "+defaultValue);
+			if(!defaultValue.contains(vendorPaymentMethod)) {
+				select.selectByVisibleText(vendorPaymentMethod);
+
+			}
+						
 			if (AppConfig.saveButtonOnAndOff == false) {
 				actions.moveToElement(driver.findElement(Locators.cancelPayment)).build().perform();
 				driver.findElement(Locators.cancelPayment).click();

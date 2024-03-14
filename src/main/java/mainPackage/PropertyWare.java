@@ -32,6 +32,11 @@ public class PropertyWare
 	        PropertyWare.intermittentPopUp(driver);
 	       
 	        driver.findElement(Locators.marketDropdown).click();
+	        if(company == null || company.isEmpty()) {
+	        	failedReason= "Unable to retrive Company";
+				RunnerClass.setFailedReason(failedReason);
+	        	return false;
+	        }
 	        String marketName = "HomeRiver Group - "+company;
 	        Select marketDropdownList = new Select(driver.findElement(Locators.marketDropdown));
 	        marketDropdownList.selectByVisibleText(marketName);
